@@ -13,8 +13,8 @@ function decomposeMovies(){
 		(local bname=$(basename "${file%%.*}")
 		local directory="$bname"
 		mkdir "$directory"
-		mkdir "$directory"
-		ffmpeg -i "$file" -qscale:v 1 -r 1 "$directory"'/ims/%06d.jpg'
+		mkdir "$directory/ims"
+		ffmpeg -i "$file" -qscale:v 1 "$directory"'/ims/%06d.jpg'
 		#mv "$file" "$directory"
 		)&
 	done
