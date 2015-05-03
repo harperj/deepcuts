@@ -1,0 +1,1 @@
+/Users/alexhall/Documents/Coursework/computerVision/finalProject/deepcuts/data_sets/batches/batch1.h5 
