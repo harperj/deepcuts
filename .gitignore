@@ -58,3 +58,8 @@ target/
 
 # OSX Stuff
 .DS_Store
+
+# LaTex Extra files
+*.aux
+*.log
+*.synctex.gz

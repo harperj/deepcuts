@@ -1,0 +1,151 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thin Sectioned Essay
+% LaTeX Template
+% Version 1.0 (3/8/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original Author:
+% Nicolas Diaz (nsdiaz@uc.cl) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{gensymb}
+
+\usepackage[font={small,it}]{caption}
+\usepackage[font={scriptsize,it}]{subcaption}
+
+\captionsetup{justification=centering}
+
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{centering} % Right align
+{\huge\@title} % Increase the font size of the title
+
+\vspace{50pt} % Some vertical space between the title and author name
+
+{\large\@author} % Author name
+%\\\@date % Date
+
+\vspace{40pt} % Some vertical space between the author block and abstract
+\end{centering}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Deep Cuts}\\ % Title
+\Large{shot detection for cinematographic analysis}} % Subtitle
+
+\author{\textsc{Rachel Albert\\ Alex Hall\\ Jonathan Harper\\ Amy Pavel} % Author
+\\{\textit{\\CS280 Final Project, Spring 2015}}} % Institution
+
+
+%\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT AND KEYWORDS
+%----------------------------------------------------------------------------------------
+
+%\renewcommand{\abstractname}{Summary} % Uncomment to change the name of the abstract to something else
+
+%\begin{abstract}
+%Text goes here
+%\end{abstract}
+%
+%\hspace*{3,6mm}\textit{Keywords:} lorem , ipsum , dolor , sit amet , lectus % Keywords
+%
+%\vspace{30pt} % Some vertical space between the abstract and first section
+
+%----------------------------------------------------------------------------------------
+%	ESSAY BODY
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction}
+
+Short introduction goes here.
+
+%------------------------------------------------
+
+\section*{Background \& Significance}
+
+Literature review and short summary of our contribution goes here.
+
+%--------------------------------------------------
+
+\section*{Style and Face Detection}
+
+Description of Alex's work goes here.
+
+
+\subsection*{Methods}
+
+Briefly describe the algorithms used.
+
+\subsection*{Results}
+
+Show the results.
+
+%------------------------------------------------
+
+\section*{Shot Detection}
+
+Short summary of why we did shot detection (transition from face detection) goes here.
+
+\subsection*{Adaptive Thresholding}
+
+Briefly describe thresholding method and show the results.
+
+\subsubsection*{Random Forests}
+
+Briefly describe random forests method and show the results.
+
+\subsubsection*{CNN}
+
+Briefly describe CNN method and show the results.
+
+%------------------------------------------------
+
+\section*{Summary \& Conclusion}
+
+Short summary and conclusion goes here.
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\bibliographystyle{unsrt}
+
+\bibliography{sample}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
