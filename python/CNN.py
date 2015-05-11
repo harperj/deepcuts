@@ -39,7 +39,7 @@
 # - <a href=http://nbviewer.ipython.org/gist/cancan101/ea563e394ea968127e0e > Fully Contained iPython Notebook CNN </a>
 # - <a href=https://github.com/kastnerkyle/kaggle-cifar10/blob/master/kaggle_dataset.py> Sample Dataset Class </a>
 
-# In[227]:
+# In[1]:
 
 #Put all of the imports here
 #NOTE: Importing all of pylearn2 is VERY slow. 
@@ -74,13 +74,13 @@ import csv
 
 
 
-# In[228]:
+# In[2]:
 
 #Check which device theano uses (gpu or cpu
 print theano.config.device
 
 
-# In[246]:
+# In[28]:
 
 #Define Global Parameters
 TRAIN_DATA = '/home/alex/Desktop/deepcuts_data/signals/'
@@ -89,8 +89,10 @@ TRAIN_LABELS = "/home/alex/Desktop/deepcuts_data/shot_annot/csv/"
 TEST_LABELS = "/home/alex/Desktop/deepcuts_data/shot_annot/csv/"
 
 
-FORCED_HEIGHT = 512
-FORCED_WIDTH = 512
+FORCED_HEIGHT = 32
+FORCED_WIDTH = 32
+
+BATCH_COUNT = 100
 
 SIGNALS = ['sample_signal']
 SIG_COUNT = 3
@@ -99,8 +101,7 @@ SIG_COUNT = 3
 NEEDS_COLOR_CONVERSION = ['h_flow', 'v_flow', 'luminance'] 
 
 
-
-# In[247]:
+# In[29]:
 
 #Each pixel value is the average from rgb
 #This is for mathematical accuracy
@@ -134,7 +135,7 @@ def convert(signal_type, im):
     
 
 
-# In[248]:
+# In[30]:
 
 #Get all files in directory
 def get_all_files(path):
@@ -142,7 +143,7 @@ def get_all_files(path):
     return sorted(files)
 
 
-# In[249]:
+# In[31]:
 
 #Get all subdirectories in a directory
 def get_all_dirs(path):
@@ -150,7 +151,7 @@ def get_all_dirs(path):
     return sorted(folders)
 
 
-# In[250]:
+# In[32]:
 
 #get all signal files for movie in directory
 def get_images(movie, signal, data_path):
@@ -169,7 +170,7 @@ def get_images(movie, signal, data_path):
     
 
 
-# In[251]:
+# In[33]:
 
 def get_movie_signals(movie, data_path):
     mov_sigs = {}
@@ -189,7 +190,7 @@ def get_movie_signals(movie, data_path):
         
 
 
-# In[252]:
+# In[34]:
 
 def get_all_sigs(data_path):
     dirs = get_all_dirs(data_path)
@@ -202,7 +203,7 @@ def get_all_sigs(data_path):
     return all_sigs
 
 
-# In[253]:
+# In[35]:
 
 #Read shot_annot csv files
 
@@ -231,7 +232,7 @@ def get_labels(label_path):
             idx = 0
             for row in reader:
                 #new_annot = ShotAnnotation(f, row[0], row[1], row[2])
-                annotations[name].append(new_annot)
+                #annotations[name].append(new_annot)
                 if(row[0] == 'CUT'):
                     annot_arrays[name][row[1]] = 1
 
@@ -243,7 +244,7 @@ def get_labels(label_path):
 #get_labels()
 
 
-# In[254]:
+# In[36]:
 
 #Make the final image and label arrays
 
@@ -280,22 +281,23 @@ def prep_data(data_path, label_path):
             
 
 
-# In[254]:
+# In[36]:
 
 
 
 
-# In[255]:
+# In[37]:
 
 #Create the FrameDataSet Class
 class FrameDataSet(dense_design_matrix.DenseDesignMatrix):
     
     def __init__(self, data_path, label_path):
         data = prep_data(data_path, label_path)
-        labels = data['labels']
-        ims = data['signals']
+        y = np.asarray(data['labels'])
+        print(y.size)
+        X = data['signals']
         
-        self.num_ims, self.ch, self.h, self.w = ims.shape
+        self.num_ims, self.ch, self.h, self.w = X.shape
         self.img_shape = (self.ch, self.h, self.w)
         start_idx = 0
         self.max_count = sys.maxsize
@@ -314,6 +316,9 @@ class FrameDataSet(dense_design_matrix.DenseDesignMatrix):
         self.label_map = {k: v for k, v in zip(self.label_names,                                               range(self.n_classes))}
         self.label_unmap = {v: k for k, v in zip(self.label_names,                                               range(self.n_classes))}
         
+        super(FrameDataSet, self).__init__(y=y,
+                                           topo_view=X)
+        
         
         
                                          
@@ -324,15 +329,15 @@ class FrameDataSet(dense_design_matrix.DenseDesignMatrix):
     
 
 
-# In[260]:
+# In[38]:
 
 #all_data = FrameDataSet(TRAIN_DATA, TRAIN_LABELS)
 
 
-# In[259]:
+# In[43]:
 
 #!/usr/bin/env python
-from pylearn2.models import mlp, maxout
+from pylearn2.models import mlp
 from pylearn2.costs.mlp.dropout import Dropout
 from pylearn2.training_algorithms import sgd, learning_rule
 from pylearn2.termination_criteria import EpochCounter
@@ -354,59 +359,29 @@ in_space = Conv2DSpace(shape=(32, 32),
                        num_channels=3,
                        axes=('c', 0, 1, 'b'))
 
-l1 = maxout.MaxoutConvC01B(layer_name='l1',
-                           pad=4,
-                           tied_b=1,
-                           W_lr_scale=.05,
-                           b_lr_scale=.05,
-                           num_channels=96,
-                           num_pieces=2,
-                           kernel_shape=(8, 8),
-                           pool_shape=(4, 4),
-                           pool_stride=(2, 2),
-                           irange=.005,
-                           max_kernel_norm=.9,
-                           partial_sum=33)
+h2 = mlp.ConvRectifiedLinear(layer_name = 'h2',
+                     output_channels=64 ,
+                     irange= .05,
+                     kernel_shape= (5, 5),
+                     pool_shape= (4, 4),
+                     pool_stride= (2, 2),
+                     max_kernel_norm= 1.9365)
 
-l2 = maxout.MaxoutConvC01B(layer_name='l2',
-                           pad=3,
-                           tied_b=1,
-                           W_lr_scale=.05,
-                           b_lr_scale=.05,
-                           num_channels=192,
-                           num_pieces=2,
-                           kernel_shape=(8, 8),
-                           pool_shape=(4, 4),
-                           pool_stride=(2, 2),
-                           irange=.005,
-                           max_kernel_norm=1.9365,
-                           partial_sum=15)
+h3 = mlp.ConvRectifiedLinear(layer_name = 'h3',
+                     output_channels=64 ,
+                     irange= .05,
+                     kernel_shape= (5, 5),
+                     pool_shape= (4, 4),
+                     pool_stride= (2, 2),
+                     max_kernel_norm= 1.9365)
 
-l3 = maxout.MaxoutConvC01B(layer_name='l3',
-                           pad=3,
-                           tied_b=1,
-                           W_lr_scale=.05,
-                           b_lr_scale=.05,
-                           num_channels=192,
-                           num_pieces=2,
-                           kernel_shape=(5, 5),
-                           pool_shape=(2, 2),
-                           pool_stride=(2, 2),
-                           irange=.005,
-                           max_kernel_norm=1.9365)
-
-l4 = maxout.Maxout(layer_name='l4',
-                   irange=.005,
-                   num_units=500,
-                   num_pieces=5,
-                   max_col_norm=1.9)
 
 output = mlp.Softmax(layer_name='y',
-                     n_classes=10,
+                     n_classes=2,
                      irange=.005,
                      max_col_norm=1.9365)
 
-layers = [l1, l2, l3, l4, output]
+layers = [h2, h3, output]
 
 #Define the model
 #Not sure if we need to modify this.
@@ -416,11 +391,11 @@ mdl = mlp.MLP(layers,
 
 #Not sure what this does from here to next comment.
 trainer = sgd.SGD(learning_rate=.17,
-                  batch_size=128,
+                  batch_size=32,
                   learning_rule=learning_rule.Momentum(.5),
                   # Remember, default dropout is .5
-                  cost=Dropout(input_include_probs={'l1': .8},
-                               input_scales={'l1': 1.}),
+                  cost=Dropout(input_include_probs={'h2': .8},
+                               input_scales={'h2': 1.}),
                   termination_criterion=EpochCounter(max_epochs=475),
                   monitoring_dataset={'valid': tst,
                                       'train': trn})
@@ -441,20 +416,31 @@ velocity = learning_rule.MomentumAdjustor(final_momentum=.65,
 decay = sgd.LinearDecayOverEpoch(start=1,
                                  saturate=500,
                                  decay_factor=.01)
-
+'''
 win = window_flip.WindowAndFlipC01B(pad_randomized=8,
                                     window_shape=(32, 32),
                                     randomize=[trn],
                                     center=[tst])
-
+'''
 #Define experiment
 experiment = Train(dataset=trn,
                    model=mdl,
                    algorithm=trainer,
-                   extensions=[watcher, velocity, decay, win])
+                   extensions=[watcher, velocity, decay])
 
 #Run experiment
 experiment.main_loop()
+
+
+
+# In[ ]:
+
+print('done')
+
+
+# In[ ]:
+
+
 
 
 
