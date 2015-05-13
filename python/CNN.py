@@ -45,8 +45,6 @@
 #NOTE: Importing all of pylearn2 is VERY slow. 
 # - Import only the needed components.
 
-get_ipython().magic(u'matplotlib inline')
-
 import numpy as np
 from scipy import misc
 
@@ -66,7 +64,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 import sys
-import Image
+from PIL import Image
 
 import csv
 
@@ -83,10 +81,10 @@ print theano.config.device
 # In[28]:
 
 #Define Global Parameters
-TRAIN_DATA = '/home/alex/Desktop/deepcuts_data/signals/'
-TEST_DATA = '/home/alex/Desktop/deepcuts_data/signals/'
-TRAIN_LABELS = "/home/alex/Desktop/deepcuts_data/shot_annot/csv/"
-TEST_LABELS = "/home/alex/Desktop/deepcuts_data/shot_annot/csv/"
+TRAIN_DATA = '/Users/harper/Dropbox/ShotDetect/signals/'
+TEST_DATA = '/Users/harper/Dropbox/ShotDetect/signals/'
+TRAIN_LABELS = "/Users/harper/Dropbox/ShotDetect/training_data/csv/"
+TEST_LABELS = "/Users/harper/Dropbox/ShotDetect/training_data/csv/"
 
 
 FORCED_HEIGHT = 32
@@ -94,7 +92,7 @@ FORCED_WIDTH = 32
 
 BATCH_COUNT = 100
 
-SIGNALS = ['sample_signal']
+SIGNALS = ['ims']
 SIG_COUNT = 3
 
 #Signals that should be converted to single channel
@@ -345,14 +343,18 @@ from pylearn2.datasets.preprocessing import Pipeline, ZCA
 from pylearn2.datasets.preprocessing import GlobalContrastNormalization
 from pylearn2.space import Conv2DSpace
 from pylearn2.train import Train
-from pylearn2.train_extensions import best_params, window_flip
+from pylearn2.train_extensions import best_params
 from pylearn2.utils import serial
 
 #Define Datasets here
+
+print "Trying to load dataset"
+
 trn = FrameDataSet(TRAIN_DATA, TRAIN_LABELS)
 
 tst = FrameDataSet(TEST_DATA, TEST_LABELS)
 
+print "Finished loading dataset"
 
 #Define the network here
 in_space = Conv2DSpace(shape=(32, 32),
