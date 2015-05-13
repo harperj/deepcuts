@@ -2,15 +2,52 @@
 
 Short summary of why we did shot detection (transition from face detection) goes here.
 
-\subsection*{Adaptive Thresholding}
+\subsection*{Feature-based approach}
 
-Briefly describe thresholding method and show the results.
+\textbf{Features:} We consider four main types of features to detect cuts in videos. First, we consider changes in luminance (Lum), or mean value of a greyscale image, and color histograms (ColHist) between pairs of frames. Intuitively, luminace and color histograms should change gradually within a shot (low difference values) and drastically across a shot boundary. We also consider the magitude histogram of the optical flow (OptMag) between neighboring frames, and the changes in optical flow between neighboring pairs of frames (OptChange). We consider the absolute magnitude (OptMag), because the optical flow algorithm often produces large vectors when it does not find good matches between neighboring frames. We consider the changes (OptChange) because the optical flow should change less within a shot than it changes between neighboring shots.
+\\
 
-\subsubsection*{Random Forests}
+\begin{table}[h!]
+  \begin{center}
+  	\small{
+	\begin{tabular}{l|lll}
+	Feature   & Precision  & Recall     & F-Measure  \\ \hline
+	Lum       & $0.62$ & $0.77$ & $0.69 $ \\
+	ColHist   & $0.75$ & $0.78$ & $0.77$ \\
+	OptMag    & $0.35$ & $0.82$ & $0.49$ \\
+	OptChange & $0.22$ & $0.45$ & $0.30$ \\ \hline
+	\end{tabular}
+	}
+  \end{center}
+  \label{table:peakresults}
+  \caption{This table shows results for predicting cuts in all videos in our dataset with the peak finding method with each feature (Lum, ColHist, OptMag, and OptChange).}
+\end{table} 
 
-Briefly describe random forests method and show the results.
+\begin{table}[h!]
+  \begin{center}
+  	\small{
+	\begin{tabular}{l|lll}
+	Feature   & Precision  & Recall     & F-Measure  \\ \hline
+	Lum       & 0.63      & 0.81   & 0.70      \\
+	ColHist   & 0.84      & 0.77   & 0.80      \\
+	OptMag    & 0.39      & 0.90   & 0.53      \\
+	OptChange & 0.15      & 0.54   & 0.23      \\
+	\textbf{SVM} & \textbf{0.94} & \textbf{0.84} & \textbf{0.89}\\ \hline
+	\end{tabular}
+	}
+  \end{center}
+  \label{table:allresults}
+  \caption{This table shows results for predicting cuts in 3 test set videos with the peak finding method with each feature (Lum, ColHist, OptMag, and OptChange) and the SVM that combines the other predictions.}
+\end{table} 
 
-\subsubsection*{CNN}
+
+\noindent \textbf{Peak finding:} We use each feature to classify cuts by finding peaks in the feature signals. A peak is a local maximum that is at least some threshold higher than the points around it. We include precision, recall and f-measure averaged over all videos for the first 10000 frames in each video in Table~\ref{table:peakresults}.\\
+
+\noindent \textbf{SVM results:} Independently, the color histograms and luminance features scored the best precision and recall. However each feature produced different detections, so we use an SVM to predict whether or not each frame is a cut, given whether or not a peak was predicted for each feature. We randomly selected a training set of 7 videos, and tested on the remaining three videos. Using this method we detect cuts with 0.94 precision , 0.84 recall, 0.89 f-measure. We compare this result to using the peak results alone on the three test videos in Table~\ref{allresults}. 
+
+In the future, we will enter in the difference between the peak and the surrounding frames rather than a binary detect or not detect, as this could further aid the SVM technique.
+
+\subsection*{CNN}
 
 Briefly describe CNN method and show the results.
 
