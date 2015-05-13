@@ -1,6 +1,10 @@
 \section*{Shot Detection}
 
-Short summary of why we did shot detection (transition from face detection) goes here.
+Shot boundary detection looks to computationally identify the moments when one shot transitions to another. This is a well studied problem \cite{boreczky1996comparison} \cite{lienhart1998comparison} \cite{lu2013fast} \cite{chavan2014review} and was a primary task in TrecVid's yearly competition \cite{smeaton_video_2010} through 2006. Table \ref{tab:shotdetResults} compares the performance of the best off-the-shelf shot boundary detector, Shotdetect \cite{mathe_shotdetect_2015}, with a ground-truth dataset, allowing for variance of up to 0.4 seconds. 
+
+Based on the results shown in Table \ref{tab:shotdetResults}, we elected to build our own shot detector using state of the art signals and machine learning techniques.
+
+An ideal shot detector has (1) High precision/Recall for both hard and gradual cuts, (2) Robustness to large changes in scene, (3) Robustness to camera motion, \& (4) Consistent location for gradual cuts (e.g. always at the halfway point between to shots).
 
 \subsection*{Feature-based approach}
 

@@ -6,7 +6,7 @@ To analyze frame composition and sequence structure we first classify each frame
 
 \subsection*{Frame Composition}
 
-We restrict our description of the frame composition to population, zoom and position of actors in the frame. Other visual elemements, such as non-human points of interest (e.g. a car in the midst of a chase sequence) can be as or more important than actors in a given frame; however, actors are at the core of most motion-pictures, and are therefore a good point of entry for better automatic understanding frame composition. To detect the population, zoom and position of actors in each frame we use a state-of-the-art face detector~\cite{mathias_face_2014}.
+We restrict our description of the frame composition to population, zoom and position of actors in the frame. Other visual elements, such as non-human points of interest (e.g. a car in the midst of a chase sequence) can be as or more important than actors in a given frame; however, actors are at the core of most motion-pictures, and are therefore a good point of entry for better automatic understanding frame composition. To detect the population, zoom and position of actors in each frame we use a state-of-the-art face detector~\cite{mathias_face_2014}.
 
 The population of a frame is defined as the number of faces visible. We consider a face to be valid whether it is an actor, a photograph, a movie-within-a-movie or some other indirect face. A face is also valid regardless of minor occlusions (e.g. hair or partial masks) and orientation (e.g. face is oriented away from the camera). A face is invalid if it is non-human (e.g. animals, monsters, drawings, or CGI renderings). 
 
@@ -430,7 +430,7 @@ Figure \ref{fig:cluster} shows multiple frames that share the same population, z
 \label{fig:pat1}
 \end{figure*}
 
-Figures \ref{fig:pat1} \& \ref{fig:pat2} show still-frame examples of a pattern occurring in several different movies from our dataset. 
+Figure \ref{fig:pat1} shows still-frame examples of a pattern occurring in several different movies from our dataset. 
 
 
 \begin{center}
@@ -462,5 +462,4 @@ Figures \ref{fig:pat1} \& \ref{fig:pat2} show still-frame examples of a pattern 
 Our current system uses the HeadHunter \cite{mathias_face_2014} detection model as formulated for the Deformable Parts Model \cite{lsvm-pami}. While not quite reaching the performance of the current state-of-the-art, this detector is available off the shelf and can be run on remote clusters with little setup cost. As better face detectors become available, we will incorporate them into our framework.
 
 %--------------------------------------------------------------------------------
-\subsubsection*{Shot Detection}
-Shot boundary detection looks to computationally identify the moments when one shot transitions to another. This is a very well studied problem \cite{boreczky1996comparison} \cite{lienhart1998comparison} \cite{lu2013fast} \cite{chavan2014review} and was a primary task in TrecVid's yearly competition \cite{smeaton_video_2010} through 2006. Table \ref{tab:shotdetResults} compares the performance of the best off-the-shelf shot boundary detector, Shotdetect \cite{mathe_shotdetect_2015}, with a ground-truth dataset created manually for several of the movies on our dataset, allowing for variance of up to 0.4 seconds. Based on these results, we elected to save shot based analyses to future work when we either get a better off-the-shelf shot detector or implement the state-of-the-art. An ideal shot detector has (1) High precision/Recall for both hard and gradual cuts, (2) Robustness to large changes in scene, (3) Robustness to camera motion, \& (4) Consistent location for gradual cuts (e.g. always at the halfway point between to shots).
+
