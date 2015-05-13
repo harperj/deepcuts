@@ -13,3 +13,15 @@ Briefly describe random forests method and show the results.
 \subsubsection*{CNN}
 
 Briefly describe CNN method and show the results.
+
+We designed a Convolutional Neural Network for use with shot boundary detection. We computed pairwise differences in luminance; vertical \& horizontal optical flow; \& the red, green, \& blue color channels for every pair of adjacent frames in a video. These differences were passed as as $6 \times h \times w$ matrix where $h = height$ \& $w = width$ of the frames. These arrays were then non-uniformly scaled to $256 \times 256$ pixels to ensure consistency across videos with different aspect ratios. 
+
+Once the $N \times 6 \times 256 \times 256$ arrays had been constructed, they were passed into a 7 layer network, with a network architecture heavily inspired by LeNet \cite{lecun1998gradient}.
+
+Due to time, data, and implementation limitations, we were unable to obtain results from using our architecture, however we plan to continue this work in future research. 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "finalpaper"
+%%% End:

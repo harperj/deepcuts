@@ -2,7 +2,7 @@
 
 We analyze film composition at two levels of abstraction: the \emph{frame} and the \emph{sequence}.  A frame is a single image produced by a camera in the film.  A sequence is a series of camera shots, where each shot is an unbroken series of frames produced by a single camera.  Frame composition and sequence structure provide a sufficient basis upon which to begin analysis, are explicitly defined, and are directly related to the work of the cinematographer.
 
-To analyze frame composition and sequence structure we first classify each frame and then use patterns in the sequence of frame classes to determine sequential structure.  We restrict our classification of frame composition in this work to frame orientations which 
+To analyze frame composition and sequence structure we first classify each frame and then use patterns in the sequence of frame classes to determine sequential structure.  We restrict our classification of frame composition in this work to frame orientations which  
 
 \subsection{Frame Composition}
 
@@ -14,7 +14,7 @@ a chase sequence) can be as or more important than actors in a given frame;
  entry for better automatic understanding frame composition.
 
 To detect the population, zoom and position of actors in each frame we 
-use a state-of-the-art face detector~\cite{?}.  
+use a state-of-the-art face detector~\cite{mathias_face_2014}.  
 
 \subsubsection{Population}
 The population of a frame is defined as the number of faces visible. We consider a face to be valid whether it is an actor, a photograph, a movie-within-a-movie or some other indirect face. A face is also valid regardless of minor occlusions (e.g. hair or partial masks) and orientation (e.g. face is oriented away from the camera). A face is invalid if it is non-human (e.g. animals, monsters, drawings, or CGI renderings). 
