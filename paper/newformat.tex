@@ -1,0 +1,79 @@
+\documentclass{sigchi}
+
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage{times}    % comment if you want LaTeX's default font
+\usepackage{url}      % llt: nicely formatted URLs
+\usepackage{color}
+
+% \usepackage{float} % pls stop tables from going to new pages
+% \restylefloat{table}
+
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, 
+% to give it a fighting chance of not being over-written, 
+% since its job is to redefine many LaTeX commands.
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+pdftitle={SIGCHI Conference Proceedings Format},
+pdfauthor={LaTeX},
+pdfkeywords={SIGCHI, proceedings, archival format},
+bookmarksnumbered,
+pdfstartview={FitH},
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+breaklinks=true,
+}
+
+% create a shortcut to typeset table headings
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
+% End of preamble. Here it comes the document.
+\begin{document}
+
+\title{Deep Cuts: Shot Detection for Cinamographic Analysis}
+
+\numberofauthors{1}
+\author{Rachel Albert, Alex Hall, Jonathan Harper, Amy Pavel}
+
+% Here is the fancy author format if you want to add anything else: 
+% \author{
+%   \alignauthor Amy Pavel, Dan Goldman, Bj\"{o}rn Hartmann, Maneesh Agrawala\\
+%   \affaddr{Adobe Research and UC Berkeley EECS}\\
+%   \email{amypavel,bjoern,maneesh@cs.berkeley.edu, dgoldman@adobe.com}}
+\maketitle
+
+\input{intro}
+\input{background}
+\input{facedetect}
+\input{shotdetect}
+
+% Or, just remove \balance and give up on balancing the last page.
+%
+\balance
+
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
+
+\bibliographystyle{acm-sigchi}
+\scriptsize{\bibliography{egbib}}
+\end{document}

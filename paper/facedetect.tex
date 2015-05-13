@@ -10,7 +10,7 @@ We restrict our description of the frame composition to population, zoom and pos
 
 The population of a frame is defined as the number of faces visible. We consider a face to be valid whether it is an actor, a photograph, a movie-within-a-movie or some other indirect face. A face is also valid regardless of minor occlusions (e.g. hair or partial masks) and orientation (e.g. face is oriented away from the camera). A face is invalid if it is non-human (e.g. animals, monsters, drawings, or CGI renderings). 
 
-Zoom is the perceived distance between camera and actor. This is typically classified by how much of the actor is visible within the shot. Figure \ref{fig:zoomClass} shows the seven commonly used zoom classifications. We stick to the traditional nomenclature of 'shot', though we are classifying frames. The classifications  are, in descending order of 'closeness':
+Zoom is the perceived distance between camera and actor. This is typically classified by how much of the actor is visible within the shot. Figure \ref{fig:zoomClass} shows the seven commonly used zoom classifications. We stick to the traditional nomenclature of ``shot'', though we are classifying frames. The classifications  are, in descending order of ``closeness'':
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,6 +35,7 @@ We assume that the proportion between the height of an actor's head and the heig
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
+  \small{
   \begin{tabular}{ l | l l}
     Shot Name & Abbrv. & Range \\ \hline
     Extreme Close-Up & ECU & $f > h$ \\ 
@@ -46,6 +47,7 @@ We assume that the proportion between the height of an actor's head and the heig
     Extreme Long Shot & ELS & $0.02h \geq f$
     \label{tab:zoomTypes}
   \end{tabular}
+  }
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -85,7 +87,7 @@ Frame composition is also defined by the position of faces in the frame. Texts o
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=0.98\linewidth]
+\includegraphics[width=0.75\linewidth]
     {fig/dyGrid.jpg}
 \end{center}
 \caption{The size of the dynamic grid is based on the size of the face relative to the size of the frame.}
@@ -145,10 +147,10 @@ The 2-talk and other scene and sequence patterns are a key element in cinematogr
 
 \begin{figure}[tb]
 \begin{center}
-\includegraphics[width=0.98\linewidth]
+\includegraphics[width=0.5\linewidth]
     {fig/lineOfAction.pdf}
 \end{center}
-\caption{By placing all cameras on one side of the invisible 'line of interest' for an entire scene, the relative positioning of actors will remain consistent from shot to shot.}
+\caption{By placing all cameras on one side of the invisible ``line of interest'' for an entire scene, the relative positioning of actors will remain consistent from shot to shot.}
 \label{fig:lineOfInterest}
 \end{figure}
 
@@ -161,139 +163,64 @@ We reduce our visual pattern finding problem into one of text analysis and use s
 %--------------------------------------------------------------------------------
 
 \section*{Results}
-
-\begin{figure*}
+\begin{figure*}[t!]
 \begin{center}
-\begin{tabular}{cccc}
-\includegraphics[width=0.15\linewidth]
+\begin{tabular}{ccccccc}
+\large{(A)}
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/01.jpg} 
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/02.jpg}  
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/10.jpg}   
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/15.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/05.jpg} 
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/close-ups/06.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/07.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/08.jpg}
-\\
-
-\includegraphics[width=0.15\linewidth]
-  {fig/close-ups/09.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/04.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/11.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/12.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
-  {fig/close-ups/13.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/14.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/03.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/close-ups/16.jpg}
 \\
 \end{tabular}
-\\
-\large{(A)}
-\\
-\bigskip
+% \bigskip
 
-\begin{tabular}{cccc}
-\includegraphics[width=0.15\linewidth]
+\begin{tabular}{ccccccc}
+\large{(B)}
+& \includegraphics[width=0.12\linewidth]
   {fig/pos/08.jpg} 
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/pos/02.jpg}  
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/pos/12.jpg}   
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
   {fig/pos/11.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
-  {fig/pos/05.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/06.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/07.jpg}   
-& \includegraphics[width=0.15\linewidth]
+& \includegraphics[width=0.12\linewidth]
+  {fig/pos/05.jpg}  
+& \includegraphics[width=0.12\linewidth]
   {fig/pos/01.jpg}
 \\
-
-\includegraphics[width=0.15\linewidth]
-  {fig/pos/09.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/04.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/15.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/10.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
-  {fig/pos/13.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/14.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/03.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/pos/16.jpg}
-\\
 \end{tabular}
-\\
-\large{(B)}
-\\
-\bigskip
+% \bigskip
 
-\begin{tabular}{cccc}
-\includegraphics[width=0.15\linewidth]
-  {fig/clust/05.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/07.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/13.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/14.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
-  {fig/clust/01.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/06.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/02.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/08.jpg}
-\\
-
-\includegraphics[width=0.15\linewidth]
-  {fig/clust/09.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/10.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/11.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/12.jpg}
-\\
-\includegraphics[width=0.15\linewidth]
-  {fig/clust/03.jpg} 
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/04.jpg}  
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/15.jpg}   
-& \includegraphics[width=0.15\linewidth]
-  {fig/clust/16.jpg}
-\\
-\end{tabular}
-\\
+\begin{tabular}{ccccccc}
 \large{(C)}
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/09.jpg} 
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/10.jpg}  
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/11.jpg}   
+% & \includegraphics[width=0.12\linewidth]
+%   {fig/clust/12.jpg}
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/03.jpg} 
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/04.jpg}  
+& \includegraphics[width=0.12\linewidth]
+  {fig/clust/15.jpg}   
+% & \includegraphics[width=0.12\linewidth]
+%   {fig/clust/16.jpg}
 \\
+\end{tabular}
 \end{center}
    \caption{Example images from our dataset. (A) Close-Ups, (B) Frames with faces in the Top Right, (C) Frames classified as 1-MS-MC}
 \label{fig:closeUps}
@@ -309,21 +236,21 @@ Figure \ref{fig:cluster} shows multiple frames that share the same population, z
 \begin{figure*}
 \begin{center}
 \begin{tabular}{c c c c c c c}
-\includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/01.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/02.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/03.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/04.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/05.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/06.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/breach/07.jpg}
-\\
+% \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/01.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/02.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/03.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/04.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/05.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/06.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/breach/07.jpg}
+% \\
 
 \includegraphics[width=0.11\linewidth]
   {fig/pat1/dinnerForSchmucks/01.jpg}
@@ -357,53 +284,53 @@ Figure \ref{fig:cluster} shows multiple frames that share the same population, z
   {fig/pat1/gangsterSquad/07.jpg}
 \\
 
-\includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/01.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/02.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/03.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/04.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/05.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/06.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/inBruges/07.jpg}
-\\
+% \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/01.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/02.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/03.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/04.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/05.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/06.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/inBruges/07.jpg}
+% \\
 
-\includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/01.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/02.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/03.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/04.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/05.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/06.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theBookOfEli/07.jpg}
-\\
+% \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/01.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/02.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/03.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/04.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/05.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/06.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theBookOfEli/07.jpg}
+% \\
 
-\includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/01.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/02.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/03.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/04.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/05.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/06.jpg}
-& \includegraphics[width=0.11\linewidth]
-  {fig/pat1/theGirlWithTheDragonTatoo/07.jpg}
-\\
+% \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/01.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/02.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/03.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/04.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/05.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/06.jpg}
+% & \includegraphics[width=0.11\linewidth]
+%   {fig/pat1/theGirlWithTheDragonTatoo/07.jpg}
+% \\
 
 \includegraphics[width=0.11\linewidth]
   {fig/pat1/thisIs40/01.jpg}
@@ -434,6 +361,7 @@ Figure \ref{fig:pat1} shows still-frame examples of a pattern occurring in sever
 
 
 \begin{center}
+\small{
   \begin{tabular}{ l | r r }
     Movie Clip & Precision \% & Recall \% \\
     \hline
@@ -451,6 +379,7 @@ Figure \ref{fig:pat1} shows still-frame examples of a pattern occurring in sever
     \textbf{ Average } &  \textbf{89.39} &  \textbf{38.63}\\
     \label{tab:shotdetResults}
   \end{tabular}
+  }
 \end{center}
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
