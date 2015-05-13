@@ -49,8 +49,6 @@ In the future, we will enter in the difference between the peak and the surround
 
 \subsection*{CNN}
 
-Briefly describe CNN method and show the results.
-
 We designed a Convolutional Neural Network for use with shot boundary detection. We computed pairwise differences in luminance; vertical \& horizontal optical flow; \& the red, green, \& blue color channels for every pair of adjacent frames in a video. These differences were passed as as $6 \times h \times w$ matrix where $h = height$ \& $w = width$ of the frames. These arrays were then non-uniformly scaled to $256 \times 256$ pixels to ensure consistency across videos with different aspect ratios. 
 
 Once the $N \times 6 \times 256 \times 256$ arrays had been constructed, they were passed into a 7 layer network, with a network architecture heavily inspired by LeNet \cite{lecun1998gradient}.
