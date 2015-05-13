@@ -6,6 +6,28 @@ Based on the results shown in Table \ref{tab:shotdetResults}, we elected to buil
 
 An ideal shot detector has (1) High precision/Recall for both hard and gradual cuts, (2) Robustness to large changes in scene, (3) Robustness to camera motion, \& (4) Consistent location for gradual cuts (e.g. always at the halfway point between to shots).
 
+
+\begin{center}
+  \begin{tabular}{ l | r r }
+    Movie Clip & Precision \% & Recall \% \\
+    \hline
+    \textit{ Back To The Future III } &  83.19 &  55.52\\
+    \textit{ Breach } &  92.78 &  51.37\\
+    \textit{ Broken Flowers } &  92.03 &  4.41\\
+    \textit{ Contagion } &  95.98 &  69.09\\
+    \textit{ Dazed And Confused } &  80.48 &  11.96\\
+    \textit{ Death Proof } &  93.13 &  49.76\\
+    \textit{ Dinner For Schmucks } &  73.45 &  23.30\\
+    \textit{ Escape From Alcatraz } &  95.16 &  47.91\\
+    \textit{ Gosford Park } &  95.27 &  1.94\\
+    \textit{ Salt } &  85.42 &  57.66\\
+    \textit{ Super 8 } &  84.35 &  49.74\\
+    \textbf{ Average } &  \textbf{89.39} &  \textbf{38.63}\\
+    \label{tab:shotdetResults}
+  \end{tabular}
+\end{center}
+
+
 \subsection*{Feature-based approach}
 
 \textbf{Features:} We consider four main types of features to detect cuts in videos. First, we consider changes in luminance (Lum), or mean value of a greyscale image, and color histograms (ColHist) between pairs of frames. Intuitively, luminace and color histograms should change gradually within a shot (low difference values) and drastically across a shot boundary. We also consider the magitude histogram of the optical flow (OptMag) between neighboring frames, and the changes in optical flow between neighboring pairs of frames (OptChange). We consider the absolute magnitude (OptMag), because the optical flow algorithm often produces large vectors when it does not find good matches between neighboring frames. We consider the changes (OptChange) because the optical flow should change less within a shot than it changes between neighboring shots.
