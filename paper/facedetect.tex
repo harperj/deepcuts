@@ -141,7 +141,7 @@ We define a sequence as a series of frames of arbitrary length. Scenes are then 
 
 %--------------------------------------------------------------------------------
 \subsection*{Identifying \& Locating Patterns}
-Understanding the visual impact of these sequence structures is best illustrated by the idea of the two person dialogue or '2-talk'. When filming these kinds of sequences, the cinematographer defines the line of interest as the line between the eyes of the two actors, see Figure \ref{fig:lineOfInterest}. The cinematographer places all of the cameras to one side of this line of interest. This significantly reduces the possibility that cameras will appear in each other's image planes. More relevant to our work, it maintains position consistency of the two actors from frame to frame, see Figure \ref{fig:2talk}. 
+Understanding the visual impact of these sequence structures is best illustrated by the idea of the two person dialogue or `2-talk'. When filming these kinds of sequences, the cinematographer defines the line of interest as the line between the eyes of the two actors, see Figure \ref{fig:lineOfInterest}. The cinematographer places all of the cameras to one side of this line of interest. This significantly reduces the possibility that cameras will appear in each other's image planes. More relevant to our work, it maintains position consistency of the two actors from frame to frame, see Figure \ref{fig:2talk}. 
 
 The 2-talk and other scene and sequence patterns are a key element in cinematographic style. The patterns defined in \cite{arijon_grammar_1991} and other cinematographic textbooks are often what differentiates a professionally filmed motion-picture from what one might see on YouTube. In the frame classification step, we tagged each frame based on its population, zoom, and position. With these tags, we convert a frame into a string as shown in Figure \ref{fig:2talk}. We then define a motion-picture as a string with many such frames. This reduces the problem of visual pattern finding to one of N-Gram analysis.
 
@@ -228,9 +228,9 @@ We reduce our visual pattern finding problem into one of text analysis and use s
 \label{fig:cluster}
 \end{figure*}
 
-Figure \ref{fig:closeUps} shows examples of close-ups found in our dataset.
-Figure \ref{fig:topRight} shows examples of frames classified as 'Top Right'. Each frame has a face in the upper right region.
-Figure \ref{fig:cluster} shows multiple frames that share the same population, zoom, \& position.
+Figure \ref{fig:closeUps} shows examples of close-ups found in our dataset (A), 
+ examples of frames classified as having a face in the upper right region (B), and
+ frames that share the same population, zoom, \& position (C).
 %--------------------------------------------------------------------------------
 
 \begin{figure*}
@@ -354,7 +354,11 @@ Figure \ref{fig:cluster} shows multiple frames that share the same population, z
 
 \end{tabular}
 \end{center}
+
+\caption{Example alternating left-right sequences recovered by our system.}
+
 \label{fig:pat1}
+
 \end{figure*}
 
 Figure \ref{fig:pat1} shows still-frame examples of a pattern occurring in several different movies from our dataset. 
