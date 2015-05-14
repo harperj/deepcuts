@@ -1,8 +1,6 @@
 \section*{Shot Detection}
 
-Shot boundary detection looks to computationally identify the moments when one shot transitions to another. This is a well studied problem \cite{boreczky1996comparison, lienhart1998comparison, lu2013fast,chavan2014review} and was a primary task in TRECVID's yearly competition \cite{smeaton_video_2010} through 2006. Table~\ref{tab:shotdetResults} displays the performance of the best off-the-shelf shot boundary detector, Shotdetect \cite{mathe_shotdetect_2015}, with a ground-truth dataset, allowing for variance of up to 0.4 seconds. Based on the low recall for this off-the-shelf shot boundary detector (Table ~\ref{tab:shotdetResults}), we elected to build our own shot detector using state of the art features and machine learning techniques.
-
-An ideal shot detector has (1) High precision/Recall for both hard and gradual cuts, (2) Robustness to large changes in scene, (3) Robustness to camera motion, \& (4) Consistent location for gradual cuts (e.g. always at the halfway point between to shots). For this project, we focus on hard cuts instead of gradual cuts as hard cuts comprise a majority of movie and video transitions.
+Shot boundary detection looks to computationally identify the moments when one shot transitions to another. This is a well studied problem \cite{boreczky1996comparison, lienhart1998comparison, lu2013fast,chavan2014review} and was a primary task in TRECVID's yearly competition \cite{smeaton_video_2010} through 2006. Table~\ref{tab:shotdetResults} displays the performance of the best off-the-shelf shot boundary detector, Shotdetect \cite{mathe_shotdetect_2015}, with a ground-truth dataset, allowing for variance of up to 0.4 seconds. Based on the low recall for this off-the-shelf shot boundary detector (table below), we elected to build our own shot detector using state of the art features and machine learning techniques.
 
 \begin{center}
   \small{
@@ -21,17 +19,24 @@ An ideal shot detector has (1) High precision/Recall for both hard and gradual c
     \textit{ Salt } &  85.42 &  57.66\\
     \textit{ Super 8 } &  84.35 &  49.74\\
     \textbf{ Average } &  \textbf{89.39} &  \textbf{38.63}\\
-    \label{tab:shotdetResults}
+	\label{tab:shotdetResults}
   \end{tabular}}
 \end{center}
 
+An ideal shot detector has (1) high precision/recall for cuts, (2) robustness to large changes in scene, and (3) robustness to camera motion. For this project, we focus on hard cuts instead of gradual cuts as hard cuts comprise a majority of transitions in film.
+
 \subsection*{Dataset}
-In our literature review, we found shot detection systems use varying datasets for evaluation, making the separate approaches generally difficult to compare. The TRECVID shot boundary detection contest produces easily comparable shot detection results, as several teams compete on the same dataset~\cite{smeaton_video_2010}. We chose to use a TRECVID shot boundary detection dataset so we could approximately compare to existing results and avoid creating our own ground truth. In particular, we used the 2001 dataset because the videos were publicly available. The dataset contains ground truth for cuts in 10 short videos.
+%In our literature review, we found that shot detection systems use varying datasets for evaluation. This makes the approaches generally difficult to compare. 
+The TRECVID shot boundary detection contest produces easily comparable shot detection results, as several teams compete on the same dataset~\cite{smeaton_video_2010}. 
+%We chose to use a TRECVID shot boundary detection dataset so we could approximately compare to existing results and avoid creating our own ground truth. 
+%In particular, 
+We used the TRECVID 2001 dataset because the videos were publicly available. The dataset contains ground truth for cuts in 10 short videos.
 
 \subsection*{Feature-based methods: Peak Finding and SVM}
 We base our approach on a broad summary of methods used in successful TRECVID submissions~\cite{smeaton_video_2010} and prior literature~\cite{boreczky1996comparison}, as complete descriptions of TRECVID contest systems are not often available. 
 
-\textbf{Features:} We consider four main types of features to detect cuts in videos. First, we compute changes in luminance (Lum), and color histograms (ColHist) between pairs of frames. Intuitively, luminance and color histograms should change gradually within a shot (low difference values) and drastically across a shot boundary (high difference values). We also compute a magnitude histogram for optical flow (OptMag) between neighboring frames, and the changes in optical flow histograms between neighboring pairs of frames (OptChange). We consider the absolute magnitude histogram (OptMag), because the optical flow algorithm often produces large vectors when it does not find good matches between neighboring frames. We consider the changes (OptChange) because the optical flow should change less within a shot than it changes between neighboring shots.
+\textbf{Features:} We compute changes in luminance (Lum), and color histograms (ColHist) between pairs of frames. Intuitively, luminance and color histograms should change gradually within a shot (low difference values) and drastically across a shot boundary (high difference values). We also compute a magnitude histogram for optical flow (OptMag) between neighboring frames, and the changes in optical flow histograms between neighboring pairs of frames (OptChange). We consider the absolute magnitude histogram (OptMag), because the optical flow algorithm often produces large vectors when it does not find good matches between neighboring frames. 
+% We consider the changes (OptChange) because the optical flow should change less within a shot than it changes between neighboring shots.
 \\
 
 \begin{table}[h!]
@@ -72,13 +77,12 @@ We base our approach on a broad summary of methods used in successful TRECVID su
 \noindent \textbf{SVM:} Independently, the color histograms and luminance features scored the best precision and recall. However each feature produced different detections, so we use an SVM to predict whether or not each frame is a cut, given whether or not a peak was predicted for each feature. We randomly selected a training set of 7 videos, and tested on the remaining 3 videos. Using this method we detect cuts with 0.94 precision , 0.84 recall, 0.89 f-measure. We compare this result to using the peak results alone on the three test videos in Table~\ref{allresults}. 
 
 We found our results achieved an F-Measure for cuts close to the average F-Measure (0.90, $\sigma = 0.083$) for cuts of the top 11 submissions in TRECVID 2001~\cite{quenot2001trec}, although these results are not directly comparable as the teams tested on all 10 videos and we only tested on 3 videos. 
-
-In the future, we could directly consider the difference between the peak for each feature and the surrounding frames rather than a binary distinction between a detection and lack of detection. Or, we could include other features that did not appear in the best two submissions~\cite{smeaton_video_2010}, such as edge change ratio.
+In the future, we could directly consider the difference between the peak for each feature and the surrounding frames rather than a binary distinction between a detection and lack of detection. 
+% Or, we could include other features that did not appear in the best two submissions~\cite{smeaton_video_2010}, such as edge change ratio.
 
 \subsection*{CNN}
 We designed a Convolutional Neural Network for use with shot boundary detection. We computed pairwise differences in luminance; vertical \& horizontal optical flow; \& the red, green, \& blue color channels for every pair of adjacent frames in a video. These differences were passed as as $6 \times h \times w$ matrix where $h = height$ \& $w = width$ of the frames. These arrays were then non-uniformly scaled to $256 \times 256$ pixels to ensure consistency across videos with different aspect ratios. 
-
-Once the $N \times 6 \times 256 \times 256$ arrays had been constructed, they were passed into a 7 layer network, with a network architecture heavily inspired by LeNet \cite{lecun1998gradient}.
+Once the arrays were constructed, they were passed into a 7 layer network heavily inspired by LeNet \cite{lecun1998gradient}.
 
 Due to time, data, and implementation limitations, we were unable to obtain results from using our architecture, however we plan to continue this work in future research. 
 

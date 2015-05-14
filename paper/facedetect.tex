@@ -123,7 +123,7 @@ Where $h$ and $w$ represent height and width, respectively, and $G$, $I$, \& $f$
 \end{figure*}
 
 \subsection*{The Sequence}
-We define a sequence as a series of frames of arbitrary length. Scenes are then a subset of sequences that fit within the single idea constraint. Defining a sequence as a series of frames with or without scene continuity allows us to search for patterns of frames that are frequently used to construct sequences. One example of this kind of pattern is that used in a 2-actor dialogue. One common construction of a scene in which two actors converse is to place one actor in the right side of the frame and the other actor in the left side of the frame. The frames alternate from showing one actors face to the other, but the relative positioning remains the same, as in Figure \ref{fig:2talk}. \cite{arijon_grammar_1991} defines many possible shot sequences. We use our frame level classifications to convert the problem of sequence pattern discovery and location into an N-Gram analysis problem.
+We define a sequence as a series of frames of arbitrary length. Defining a sequence as a series of frames with or without scene continuity allows us to search for patterns of frames that are frequently used to construct sequences. One example of this kind of pattern is that used in a 2-actor dialogue. One common construction of a scene in which two actors converse is to place one actor in the right side of the frame and the other actor in the left side of the frame. The frames alternate from showing one actors face to the other, but the relative positioning remains the same, as in Figure \ref{fig:2talk}. \cite{arijon_grammar_1991} defines many possible shot sequences. We use our frame level classifications to convert the problem of sequence pattern discovery and location into an N-Gram analysis problem.
 
 %\begin{figure}
 %\begin{center}
@@ -141,23 +141,28 @@ We define a sequence as a series of frames of arbitrary length. Scenes are then 
 
 %--------------------------------------------------------------------------------
 \subsection*{Identifying \& Locating Patterns}
-Understanding the visual impact of these sequence structures is best illustrated by the idea of the two person dialogue or `2-talk'. When filming these kinds of sequences, the cinematographer defines the line of interest as the line between the eyes of the two actors, see Figure \ref{fig:lineOfInterest}. The cinematographer places all of the cameras to one side of this line of interest. This significantly reduces the possibility that cameras will appear in each other's image planes. More relevant to our work, it maintains position consistency of the two actors from frame to frame, see Figure \ref{fig:2talk}. 
+Understanding the visual impact of these sequence structures is best illustrated by the idea of the two person dialogue or `2-talk'. When filming these kinds of sequences, the cinematographer defines the line of interest as the line between the eyes of the two actors.
+%, see Figure \ref{fig:lineOfInterest}. 
+The cinematographer places all of the cameras to one side of this line of interest. This 
+%significantly reduces the possibility that cameras will appear in each other's image planes. More relevant to our work, it 
+maintains position consistency of the two actors from frame to frame, see Figure \ref{fig:2talk}. 
 
 The 2-talk and other scene and sequence patterns are a key element in cinematographic style. The patterns defined in \cite{arijon_grammar_1991} and other cinematographic textbooks are often what differentiates a professionally filmed motion-picture from what one might see on YouTube. In the frame classification step, we tagged each frame based on its population, zoom, and position. With these tags, we convert a frame into a string as shown in Figure \ref{fig:2talk}. We then define a motion-picture as a string with many such frames. This reduces the problem of visual pattern finding to one of N-Gram analysis.
 
-\begin{figure}[tb]
-\begin{center}
-\includegraphics[width=0.5\linewidth]
-    {fig/lineOfAction.pdf}
-\end{center}
-\caption{By placing all cameras on one side of the invisible ``line of interest'' for an entire scene, the relative positioning of actors will remain consistent from shot to shot.}
-\label{fig:lineOfInterest}
-\end{figure}
+% \begin{figure}[tb]
+% \begin{center}
+% \includegraphics[width=0.5\linewidth]
+%     {fig/lineOfAction.pdf}
+% \end{center}
+% \caption{By placing all cameras on one side of the invisible ``line of interest'' for an entire scene, the relative positioning of actors will remain consistent from shot to shot.}
+% \label{fig:lineOfInterest}
+% \end{figure}
 
 %--------------------------------------------------------------------------------
 \subsubsection*{N-Gram Analysis}
 
-We reduce our visual pattern finding problem into one of text analysis and use simple N-Gram algorithms to find visual patterns. The primary algorithm we use is most frequent substring. Having defined each movie in a dataset as a string of frame-tags, we pass the set of strings into the algorithm. We also define a minimum length, a maximum length, and a minumum or maximum number of repetitions. The system outputs a list of all patterns that meet our length and repetition critera and their frequency within the dataset. If we have a known pattern, whether selected from a cinematography text or found through our pattern discovery tool, we use simple text-search tools to find which movies contain that pattern and where the pattern occurs. Figures \ref{fig:pat1} shows still-frame examples of a single pattern found in multiple movies.
+% We reduce our visual pattern finding problem into one of text analysis and use simple N-Gram algorithms to find visual patterns. 
+The primary algorithm we use for n-gram analysis is most frequent substring. We define a minimum length, a maximum length, and a minumum or maximum number of repetitions for sequences. The system outputs a list of all patterns that meet our length and repetition critera and their frequency within the dataset. If we have a known pattern from a cinematography text or found through our pattern discovery tool, we use simple text-search tools to find which movies contain that pattern and where the pattern occurs. Figures \ref{fig:pat1} shows still-frame examples of a single pattern found in multiple movies.
 
 
 %--------------------------------------------------------------------------------
@@ -366,10 +371,8 @@ Figure \ref{fig:pat1} shows still-frame examples of a pattern occurring in sever
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %--------------------------------------------------------------------------------
-\subsection*{Detectors}
-%--------------------------------------------------------------------------------
 \subsubsection*{Face Detection}
-Our current system uses the HeadHunter \cite{mathias_face_2014} detection model as formulated for the Deformable Parts Model \cite{lsvm-pami}. While not quite reaching the performance of the current state-of-the-art, this detector is available off the shelf and can be run on remote clusters with little setup cost. As better face detectors become available, we will incorporate them into our framework.
+Our current system uses the HeadHunter \cite{mathias_face_2014} detection model as formulated for the Deformable Parts Model \cite{lsvm-pami}. This detector is available off the shelf and can be run on remote clusters with little setup cost.
 
 %--------------------------------------------------------------------------------
 
